@@ -353,6 +353,45 @@
       font-size: 0.78rem;
     }
 
+    /* ─── CTA SELECTION MODAL ─── */
+    .cta-modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(17,17,17,0.55); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center; padding: 1.5rem;
+    }
+    .cta-modal-overlay.open { display: flex; }
+    .cta-modal {
+      background: var(--white); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md); padding: 2.5rem 2.2rem 2.2rem;
+      max-width: 420px; width: 100%; position: relative; text-align: center;
+      animation: ctaPop 0.18s ease-out;
+    }
+    @keyframes ctaPop { from { opacity: 0; transform: translateY(8px) scale(0.98); } to { opacity: 1; transform: none; } }
+    .cta-modal-close {
+      position: absolute; top: 0.9rem; right: 1.1rem; background: none; border: none;
+      font-size: 1.6rem; line-height: 1; color: var(--gray-mid); cursor: pointer;
+      transition: color 0.2s;
+    }
+    .cta-modal-close:hover { color: var(--navy); }
+    .cta-modal h3 {
+      font-family: var(--font-display); font-weight: 400; font-size: 1.7rem;
+      color: var(--navy); margin-bottom: 0.5rem;
+    }
+    .cta-modal p { color: var(--gray-mid); font-size: 0.92rem; line-height: 1.55; margin-bottom: 1.6rem; }
+    .cta-modal-options { display: flex; flex-direction: column; gap: 0.8rem; }
+    .cta-modal-btn {
+      display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+      padding: 0.95rem 1rem; border-radius: 10px; font-family: var(--font-head);
+      font-weight: 700; font-size: 0.92rem; text-decoration: none; transition: all 0.2s;
+    }
+    .cta-modal-btn.primary { background: var(--navy); color: var(--white); }
+    .cta-modal-btn.primary:hover { background: #333; transform: translateY(-1px); }
+    .cta-modal-btn.secondary {
+      background: var(--white); color: var(--navy); border: 2px solid var(--navy);
+    }
+    .cta-modal-btn.secondary:hover { background: var(--navy); color: var(--white); }
+    .cta-modal-sub { display: block; font-size: 0.74rem; font-weight: 500; opacity: 0.7; margin-top: 0.15rem; }
+
     /* ─── RESPONSIVE ─── */
 
     /* Accordion: hidden on desktop, visible only on mobile */
@@ -458,6 +497,7 @@
     <p>Expert bookkeeping, payroll, and tax prep for small businesses across the Greater Toronto Area. Clean books, clear insights, zero headaches.</p>
     <div class="hero-actions">
       <a href="https://calendly.com/rdbookkeeping-info/introduction-consultation-rd-bookkeeping" target="_blank" class="btn-primary">Book a Free Consultation</a>
+      <a href="mailto:info@rdbookkeeping.ca?subject=Bookkeeping%20Inquiry" class="btn-secondary">Email Us</a>
       <a href="#pricing" class="btn-secondary">View Pricing →</a>
     </div>
   </div>
@@ -474,7 +514,7 @@
       </div>
       <div class="checklist-item">
         <div class="checklist-check">✓</div>
-        <span>HST / GST records prepared &amp; ready for your accountant to file<small>We organize everything — your accountant handles the submission</small></span>
+        <span>HST / GST preparation &amp; CRA filing<small>On-time submissions, zero penalties</small></span>
       </div>
       <div class="checklist-item">
         <div class="checklist-check">✓</div>
@@ -492,7 +532,7 @@
 <!-- TRUST BAR -->
 <div class="trust-bar">
   <div class="trust-item"><span class="trust-icon">✓</span> QuickBooks ProAdvisor Certified</div>
-  <div class="trust-item"><span class="trust-icon">✓</span> CRA-Ready Recordkeeping</div>
+  <div class="trust-item"><span class="trust-icon">✓</span> CRA Compliant Filings</div>
   <div class="trust-item"><span class="trust-icon">✓</span> HST / GST Specialists</div>
   <div class="trust-item"><span class="trust-icon">✓</span> Serving the Greater Toronto Area</div>
   <div class="trust-item"><span class="trust-icon">✓</span> Flat Monthly Pricing</div>
@@ -513,8 +553,8 @@
   <div class="services-grid">
     <div class="service-card">
       <div class="service-icon">📒</div>
-      <h3>Monthly Bookkeeping</h3>
-      <p>We record, categorize, and reconcile every transaction each month — so your books are always accurate and current.</p>
+      <h3>Monthly / Quarterly Bookkeeping</h3>
+      <p>We record, categorize, and reconcile every transaction on the cadence that fits your business — monthly or quarterly — so your books stay accurate and current.</p>
       <a href="#contact" class="service-link">Learn more →</a>
     </div>
     <div class="service-card">
@@ -525,8 +565,8 @@
     </div>
     <div class="service-card">
       <div class="service-icon">🧾</div>
-      <h3>HST / GST Preparation</h3>
-      <p>Accurate sales tax tracking and organized records prepared and ready for your accountant to file. We handle the calculations so nothing gets missed.</p>
+      <h3>HST / GST Filing</h3>
+      <p>Accurate sales tax tracking and on-time CRA filings. We handle the calculations and submissions so you never miss a deadline.</p>
       <a href="#contact" class="service-link">Learn more →</a>
     </div>
     <div class="service-card">
@@ -668,35 +708,35 @@
   <div class="pricing-grid" id="plans-monthly">
     <div class="pricing-card">
       <div class="plan-name">Starter</div>
-      <div class="plan-price"><sup>$</sup>225</div>
+      <div class="plan-price"><sup>$</sup>325</div>
       <div class="plan-period">per month</div>
       <div class="plan-desc">Ideal for sole proprietors and freelancers with straightforward, consistent books.</div>
       <ul class="plan-features">
         <li>Up to 100 transactions/month</li>
         <li>Bank &amp; credit card reconciliation</li>
         <li>Monthly P&amp;L &amp; balance sheet</li>
-        <li>QBO &amp; Wave maintenance</li>
-        <li>HST/GST records prepared &amp; ready for your accountant to file</li>
+        <li>QBO maintenance</li>
+        <li>HST/GST filing: +$80/quarter</li>
         <li>Email &amp; phone support</li>
       </ul>
-      <a href="https://calendly.com/rdbookkeeping-info/introduction-consultation-rd-bookkeeping" target="_blank" class="plan-cta">Get Started</a>
+      <a href="#" onclick="openCtaModal(); return false;" class="plan-cta">Get Started</a>
     </div>
 
     <div class="pricing-card featured">
       <div class="popular-tag">Most Popular</div>
       <div class="plan-name">Growth</div>
-      <div class="plan-price"><sup>$</sup>450</div>
+      <div class="plan-price"><sup>$</sup>475</div>
       <div class="plan-period">per month</div>
       <div class="plan-desc">For small businesses with employees, multiple accounts, or higher transaction volume.</div>
       <ul class="plan-features">
         <li>Up to 250 transactions/month</li>
         <li>Everything in Starter</li>
         <li>AR/AP tracking</li>
-        <li>HST/GST records prepared &amp; ready for your accountant to file</li>
-        <li>Payroll for up to 3 employees (+$10/month per additional)</li>
+        <li>Quarterly HST filing included</li>
         <li>Monthly cash flow summary</li>
+        <li>Dedicated bookkeeper</li>
       </ul>
-      <a href="https://calendly.com/rdbookkeeping-info/introduction-consultation-rd-bookkeeping" target="_blank" class="plan-cta">Get Started</a>
+      <a href="#" onclick="openCtaModal(); return false;" class="plan-cta">Get Started</a>
     </div>
 
     <div class="pricing-card">
@@ -707,12 +747,12 @@
       <ul class="plan-features">
         <li>Up to 500 transactions/month</li>
         <li>Everything in Growth</li>
-        <li>Payroll for up to 8 employees (+$10/month per additional)</li>
-        <li>Annual T4 preparation</li>
+        <li>CPA-ready year-end package</li>
+        <li>Custom financial reporting</li>
         <li>Quarterly review call</li>
-        <li>Cash flow projections &amp; financial insights</li>
+        <li>Priority 48-hr turnaround</li>
       </ul>
-      <a href="https://calendly.com/rdbookkeeping-info/introduction-consultation-rd-bookkeeping" target="_blank" class="plan-cta">Get Started</a>
+      <a href="#" onclick="openCtaModal(); return false;" class="plan-cta">Get Started</a>
     </div>
   </div>
 
@@ -720,67 +760,68 @@
   <div class="pricing-grid" id="plans-quarterly" style="display:none;">
     <div class="pricing-card">
       <div class="plan-name">Starter</div>
-      <div class="plan-price"><sup>$</sup>225</div>
+      <div class="plan-price"><sup>$</sup>325</div>
       <div class="plan-period">per quarter</div>
       <div class="plan-desc">For self-employed individuals and side businesses with low, predictable transaction volume.</div>
       <ul class="plan-features">
         <li>Up to 100 transactions/quarter</li>
         <li>Bank &amp; credit card reconciliation</li>
         <li>Quarterly P&amp;L &amp; balance sheet</li>
-        <li>QBO &amp; Wave maintenance</li>
-        <li>HST/GST records prepared &amp; ready for your accountant to file</li>
+        <li>QBO maintenance</li>
+        <li>HST/GST filing: +$80/quarter</li>
         <li>Email &amp; phone support</li>
       </ul>
-      <a href="https://calendly.com/rdbookkeeping-info/introduction-consultation-rd-bookkeeping" target="_blank" class="plan-cta">Get Started</a>
+      <a href="#" onclick="openCtaModal(); return false;" class="plan-cta">Get Started</a>
     </div>
 
     <div class="pricing-card featured">
       <div class="popular-tag">Most Popular</div>
       <div class="plan-name">Growth</div>
-      <div class="plan-price"><sup>$</sup>325</div>
+      <div class="plan-price"><sup>$</sup>475</div>
       <div class="plan-period">per quarter</div>
       <div class="plan-desc">For small businesses that don't need monthly reporting but want clean, complete books each quarter.</div>
       <ul class="plan-features">
         <li>Up to 250 transactions/quarter</li>
         <li>Everything in Starter</li>
         <li>AR/AP tracking</li>
-        <li>HST/GST records prepared &amp; ready for your accountant to file</li>
+        <li>HST/GST filing included</li>
         <li>Quarterly cash flow summary</li>
         <li>Dedicated bookkeeper</li>
       </ul>
-      <a href="https://calendly.com/rdbookkeeping-info/introduction-consultation-rd-bookkeeping" target="_blank" class="plan-cta">Get Started</a>
+      <a href="#" onclick="openCtaModal(); return false;" class="plan-cta">Get Started</a>
     </div>
 
     <div class="pricing-card">
       <div class="plan-name">Premium</div>
-      <div class="plan-price"><sup>$</sup>500</div>
+      <div class="plan-price"><sup>$</sup>700</div>
       <div class="plan-period">per quarter</div>
       <div class="plan-desc">For larger or more complex businesses operating on a quarterly cycle that need full-service reporting.</div>
       <ul class="plan-features">
         <li>Up to 500 transactions/quarter</li>
         <li>Everything in Growth</li>
+        <li>Custom financial reporting</li>
         <li>Quarterly review call</li>
-        <li>Cash flow projections &amp; financial insights</li>
+        <li>Priority 48-hr turnaround</li>
         <li>CPA-ready year-end package</li>
       </ul>
-      <a href="https://calendly.com/rdbookkeeping-info/introduction-consultation-rd-bookkeeping" target="_blank" class="plan-cta">Get Started</a>
+      <a href="#" onclick="openCtaModal(); return false;" class="plan-cta">Get Started</a>
     </div>
   </div>
 
-  <!-- PAYROLL ADD-ON (shown only with quarterly) -->
-  <div id="payroll-addon" style="display:none; margin-top:2.5rem;">
+  <!-- PAYROLL ADD-ON (available on any plan) -->
+  <div id="payroll-addon" style="margin-top:2.5rem;">
     <div style="background:var(--off-white);border:1px solid var(--gray-light);border-radius:var(--radius-lg);padding:2rem 2.5rem;max-width:700px;margin:0 auto;">
       <div style="display:flex;align-items:flex-start;gap:1.5rem;flex-wrap:wrap;">
         <div style="flex:1;min-width:260px;">
           <div class="section-label" style="margin-bottom:0.5rem;">Optional Add-On</div>
-          <h3 style="font-family:var(--font-display);font-size:1.3rem;font-weight:400;color:var(--navy);margin-bottom:0.5rem;">Monthly Payroll Management</h3>
-          <p style="color:var(--gray-mid);font-size:0.875rem;line-height:1.6;">Payroll runs on a monthly cycle regardless of your bookkeeping frequency. Add payroll as a standalone monthly service — your books stay quarterly, your team gets paid on time.</p>
+          <h3 style="font-family:var(--font-display);font-size:1.3rem;font-weight:400;color:var(--navy);margin-bottom:0.5rem;">Payroll Management</h3>
+          <p style="color:var(--gray-mid);font-size:0.875rem;line-height:1.6;">Hand off payroll entirely. We process your team's pay, calculate and remit source deductions, and handle T4s at year-end — keeping you fully compliant with the CRA. Available as a standalone add-on to any bookkeeping plan.</p>
           <ul style="list-style:none;margin-top:1rem;display:flex;flex-direction:column;gap:0.5rem;">
             <li style="display:flex;gap:0.5rem;font-size:0.85rem;color:var(--gray-dark);"><span style="font-weight:700;color:var(--navy);">✓</span> Payroll processing &amp; direct deposit</li>
             <li style="display:flex;gap:0.5rem;font-size:0.85rem;color:var(--gray-dark);"><span style="font-weight:700;color:var(--navy);">✓</span> Source deduction calculations &amp; remittances</li>
             <li style="display:flex;gap:0.5rem;font-size:0.85rem;color:var(--gray-dark);"><span style="font-weight:700;color:var(--navy);">✓</span> T4 preparation at year-end</li>
             <li style="display:flex;gap:0.5rem;font-size:0.85rem;color:var(--gray-dark);"><span style="font-weight:700;color:var(--navy);">✓</span> CRA payroll compliance</li>
-            <li style="display:flex;gap:0.5rem;font-size:0.85rem;color:var(--gray-dark);"><span style="font-weight:700;color:var(--navy);">✓</span> +$10/month per additional employee over cap</li>
+            <li style="display:flex;gap:0.5rem;font-size:0.85rem;color:var(--gray-dark);"><span style="font-weight:700;color:var(--navy);">✓</span> +$15/month per additional employee over cap</li>
           </ul>
         </div>
         <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;padding:1.5rem 2rem;background:var(--white);border:1px solid var(--gray-light);border-radius:var(--radius);text-align:center;min-width:160px;">
@@ -788,7 +829,7 @@
           <div style="font-family:var(--font-display);font-size:2.2rem;font-weight:400;color:var(--navy);line-height:1;"><sup style="font-size:1rem;vertical-align:super;">$</sup>99</div>
           <div style="font-size:0.78rem;color:var(--gray-mid);">per month</div>
           <div style="font-size:0.72rem;color:var(--gray-mid);margin-top:0.25rem;">Up to 3 employees</div>
-          <a href="https://calendly.com/rdbookkeeping-info/introduction-consultation-rd-bookkeeping" target="_blank" style="margin-top:0.75rem;display:block;background:var(--navy);color:var(--white);font-family:var(--font-head);font-weight:700;font-size:0.8rem;padding:0.6rem 1.2rem;border-radius:8px;text-decoration:none;">Add to My Plan</a>
+          <a href="#" onclick="openCtaModal(); return false;" style="margin-top:0.75rem;display:block;background:var(--navy);color:var(--white);font-family:var(--font-head);font-weight:700;font-size:0.8rem;padding:0.6rem 1.2rem;border-radius:8px;text-decoration:none;cursor:pointer;">Add to My Plan</a>
         </div>
       </div>
     </div>
@@ -823,7 +864,7 @@
       <ul>
         <li><a href="#">Monthly Bookkeeping</a></li>
         <li><a href="#">Catch-Up Bookkeeping</a></li>
-        <li><a href="#">HST / GST Preparation</a></li>
+        <li><a href="#">HST / GST Filing</a></li>
         <li><a href="#">Payroll Management</a></li>
         <li><a href="#">Year-End Prep</a></li>
       </ul>
@@ -858,7 +899,6 @@
     btn.classList.add('active');
     document.getElementById('plans-monthly').style.display = type === 'monthly' ? 'grid' : 'none';
     document.getElementById('plans-quarterly').style.display = type === 'quarterly' ? 'grid' : 'none';
-    document.getElementById('payroll-addon').style.display = type === 'quarterly' ? 'block' : 'none';
   }
 </script>
 
@@ -906,6 +946,34 @@
     const target = window.location.hash.replace('#', '');
     if (sectionToAccordion[target]) openAccordion(sectionToAccordion[target]);
   }
+</script>
+
+<!-- CTA SELECTION MODAL -->
+<div id="cta-modal" class="cta-modal-overlay" onclick="closeCtaModal(event)">
+  <div class="cta-modal" role="dialog" aria-modal="true" aria-label="Get started with RD Bookkeeping">
+    <button class="cta-modal-close" onclick="closeCtaModal()" aria-label="Close">&times;</button>
+    <h3>Let's get started</h3>
+    <p>Pick whichever works best for you — book a quick call, or send us a note and we'll get back to you.</p>
+    <div class="cta-modal-options">
+      <a href="https://calendly.com/rdbookkeeping-info/introduction-consultation-rd-bookkeeping" target="_blank" class="cta-modal-btn primary">📅 Book a Free Consultation</a>
+      <a href="mailto:info@rdbookkeeping.ca?subject=Bookkeeping%20Inquiry" class="cta-modal-btn secondary">✉️ Email Us<span class="cta-modal-sub">info@rdbookkeeping.ca</span></a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openCtaModal() {
+    document.getElementById('cta-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeCtaModal(event) {
+    if (event && event.target !== event.currentTarget && event.type === 'click') return;
+    document.getElementById('cta-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeCtaModal();
+  });
 </script>
 </body>
 </html>
